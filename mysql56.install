@@ -1,4 +1,9 @@
 ## arg 1:  the new package version
+pre_install() {
+    id --group mysql &>/dev/null || groupadd mysql
+    id --user mysql &>/dev/null || useradd -r -g mysql mysql
+}
+## arg 1:  the new package version
 post_install() {
     cd /usr/local
     ln -s "/opt/mysql56" mysql
