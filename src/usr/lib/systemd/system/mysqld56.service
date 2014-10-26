@@ -1,0 +1,16 @@
+[Unit]
+Description=MySQL 5.6 database server
+After=syslog.target
+
+[Service]
+User=mysql
+Group=mysql
+
+ExecStart=/usr/local/mysql/bin/mysqld --pid-file=/run/mysqld56/mysqld56.pid 
+#ExecStartPost=/usr/local/mysql/bin/mysqld-post
+
+Restart=always
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
