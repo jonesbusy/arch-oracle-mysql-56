@@ -1,12 +1,12 @@
 [Unit]
-Description=MySQL 5.6 database server
+Description=Oracle MySQL database server
 After=syslog.target
 
 [Service]
 User=mysql
 Group=mysql
 
-ExecStart=/usr/local/mysql/bin/mysqld --pid-file=/run/oracle-mysql/oracle-mysql.pid 
+ExecStart=/usr/local/mysql/bin/mysqld --pid-file=/run/oracle-mysql/oracle-mysql.pid --socket=/run/oracle-mysql/oracle-mysql.socket 
 
 Restart=always
 PrivateTmp=true
