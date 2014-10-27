@@ -3,7 +3,7 @@
 pkgname=oracle-mysql
 pkgver=5.6.21
 pkgrel=0
-pkgdesc="Oracle MySQL 5.6"
+pkgdesc="Oracle MySQL"
 url="http://www.mysql.com/"
 arch=('i686' 'x86_64')
 license=('GPL2')

@@ -12,15 +12,17 @@ post_install() {
     echo "Changing ownership."
     chown -R mysql .
     chgrp -R mysql .
-    echo "\e[1;32mDone.\e[0m"
     echo "Installing MySQL databases..."
     scripts/mysql_install_db --user=mysql > /dev/null 2>&1 && echo "Sucessfully installed MySQL databases."
     chown -R root .
     chown -R mysql data
+    echo "Installing service..."
     mkdir /var/run/oracle-mysql
+    chown -R mysql /var/run/oracle-mysql
+    chgrp -R mysql /var/run/oracle-mysql
     echo "Reloading systemctl daemons..."
     systemctl daemon-reload
-    echo "Use `systemctl start oracle-mysql` to start MySQL."
+    echo "Use \`systemctl start oracle-mysql\` to start MySQL."
 }
 
 pre_remove() {
@@ -37,5 +39,7 @@ post_remove() {
     rm -Rf mysql
     echo "Removing installation folder..."
     rm -Rf /opt/oracle-mysql
+    echo "Reloading systemctl daemons..."
+    systemctl daemon-reload
     echo "Done."
 }
