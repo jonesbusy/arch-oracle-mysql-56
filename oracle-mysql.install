@@ -6,7 +6,7 @@ pre_install() {
 ## arg 1:  the new package version
 post_install() {
     cd /usr/local
-    echo "Linking MySQL installation to /usr/local/mysql"
+    echo "Linking MySQL installation to /usr/local/mysql."
     ln -s "/opt/oracle-mysql" mysql
     cd /usr/local/mysql
     echo "Changing ownership."
@@ -20,9 +20,11 @@ post_install() {
     mkdir /var/run/oracle-mysql
     chown -R mysql /var/run/oracle-mysql
     chgrp -R mysql /var/run/oracle-mysql
+    mv /user/local/mysql/my.cnf.tmp mv /user/local/mysql/my.cnf
     echo "Reloading systemctl daemons..."
     systemctl daemon-reload
     echo "Use \`systemctl start oracle-mysql\` to start MySQL."
+    echo "Connect using \`mysql --socket=/var/run/oracle-mysql/oracle-mysql.socket\`"
 }
 
 pre_remove() {
