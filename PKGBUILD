@@ -7,7 +7,7 @@ pkgdesc="Oracle MySQL 5.6"
 url="http://www.mysql.com/"
 arch=('i686' 'x86_64')
 license=('GPL2')
-depends=('gcc-libs-multilib' 'bash' 'python')
+depends=('gcc-libs-multilib' 'bash' 'python' 'libaio')
 optdepends=()
 makedepends=()
 conflicts=()
@@ -22,6 +22,7 @@ md5sums=('79f9a54bdc3731fd4bdf22db77f27ca7')
 PKGEXT='.pkg.tar'
 
 package() {
+    rm -Rf "${srcdir}/${pkgname}"
     mv "${srcdir}/mysql-5.6.21-linux-glibc2.5-$CARCH" "${srcdir}/${pkgname}"
     mkdir "${pkgdir}/opt"
     cp -R "${pkgname}" "${pkgdir}/opt" 
