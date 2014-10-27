@@ -20,11 +20,11 @@ post_install() {
     mkdir /var/run/oracle-mysql
     chown -R mysql /var/run/oracle-mysql
     chgrp -R mysql /var/run/oracle-mysql
-    mv /user/local/mysql/my.cnf.tmp mv /user/local/mysql/my.cnf
+    mv /usr/local/mysql/my.cnf.tmp /usr/local/mysql/my.cnf
     echo "Reloading systemctl daemons..."
     systemctl daemon-reload
     echo "Use \`systemctl start oracle-mysql\` to start MySQL."
-    echo "Connect using \`mysql --socket=/var/run/oracle-mysql/oracle-mysql.socket\`"
+    echo "Connect using \`/usr/local/mysql/bin/mysql --defaults-file=/usr/local/mysql/my.cnf\`"
 }
 
 pre_remove() {

@@ -26,6 +26,6 @@ package() {
     mv "${srcdir}/mysql-5.6.21-linux-glibc2.5-$CARCH" "${srcdir}/${pkgname}"
     mkdir "${pkgdir}/opt"
     cp -R "${pkgname}" "${pkgdir}/opt" 
-    cp "${srcdir}"/my.cnf.tmp ${pkgdir}/opt/"${pkgname}"/my.cnf.tmp
+    cp "${srcdir}/my.cnf.tmp" "${pkgdir}/opt/${pkgname}/my.cnf.tmp"
     cp -R "${srcdir}/usr" "${pkgdir}/usr"
 }
