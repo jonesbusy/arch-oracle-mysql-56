@@ -15,9 +15,11 @@ groups=('mysql')
 replaces=()
 options=(!strip !zipman !purge)
 backup=()
-install='mysql56.install'
+install='oracle-mysql.install'
 source=("${pkgname}.tar.gz::http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.21-linux-glibc2.5-$CARCH.tar.gz")
 md5sums=('79f9a54bdc3731fd4bdf22db77f27ca7')
+
+PKGEXT='.pkg.tar'
 
 build() {
     cd "${srcdir}"
@@ -25,6 +27,7 @@ build() {
 }
 
 package() {
-  cp -R "${srcdir}/usr" "${pkgdir}/usr"
-  cp -R "${srcdir}/opt" "${pkgdir}/opt" 
+    mkdir "${pkgdir}/opt"
+    cp -R "${srcdir}/usr" "${pkgdir}/usr"
+    cp -R "${srcdir}/opt" "${pkgdir}/opt" 
 }

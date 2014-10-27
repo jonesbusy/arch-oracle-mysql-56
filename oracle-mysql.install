@@ -6,7 +6,7 @@ pre_install() {
 ## arg 1:  the new package version
 post_install() {
     cd /usr/local
-    ln -s "/opt/mysql56" mysql
+    ln -s "/opt/oracle-mysql" mysql
     cd /usr/local/mysql
     chown -R mysql .
     chgrp -R mysql .
