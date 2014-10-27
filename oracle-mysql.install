@@ -1,28 +1,33 @@
 ## arg 1:  the new package version
 pre_install() {
-    id --group mysql &>/dev/null || groupadd mysql
-    id --user mysql &>/dev/null || useradd -r -g mysql mysql
+    id --group mysql &>/dev/null || (groupadd mysql && echo "\e[1;32mSucessfully created mysql group.\e[0m")
+    id --user mysql &>/dev/null || (useradd -r -g mysql mysql && echo "\e[1;32mSucessfully created mysql user.\e[0m")
 }
 ## arg 1:  the new package version
 post_install() {
     cd /usr/local
-    msg "Linked MySQL installation to /usr/local/mysql"
+    echo "Linking MySQL installation to /usr/local/mysql"
     ln -s "/opt/oracle-mysql" mysql
     cd /usr/local/mysql
+    echo "Changing ownership."
     chown -R mysql .
     chgrp -R mysql .
+    echo "\e[1;32mDone.\e[0m"
     echo "Installing MySQL databases..."
-    scripts/mysql_install_db --user=mysql > /dev/null 2>&1 && echo "Done."
+    scripts/mysql_install_db --user=mysql > /dev/null 2>&1 && echo "\e[1;32mSucessfully installed MySQL databases.\e[0m"
+    echo "Changing permissions."
     chown -R root .
     chown -R mysql data
     echo "Reloading systemctl daemons..."
     systemctl daemon-reload
+    echo "\e[1;32mDone.\e[0m"
 }
 
 pre_remove() {
     echo "Stopping MySQL service..."
     systemctl disable oracle-mysql
     systemctl stop oracle-mysql
+    echo "\e[1;32mDone.\e[0m"
 }
 
 post_remove() {
@@ -31,5 +36,5 @@ post_remove() {
     rm -Rf mysql
     echo "Removing installation folder..."
     rm -Rf /opt/oracle-mysql
-
+    echo "\e[1;32mDone.\e[0m"
 }
