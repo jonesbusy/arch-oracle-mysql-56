@@ -1,4 +1,5 @@
 src/opt/oracle-mysql/
 pkg/
 **/*.gz
+*.tar
 *.xz
