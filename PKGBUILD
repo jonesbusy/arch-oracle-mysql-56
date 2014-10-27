@@ -23,11 +23,11 @@ PKGEXT='.pkg.tar'
 
 build() {
     cd "${srcdir}"
+    mkdir "${pkgdir}/opt"
     mv "mysql-5.6.21-linux-glibc2.5-$CARCH" "opt/${pkgname}"
 }
 
 package() {
-    mkdir "${pkgdir}/opt"
     cp -R "${srcdir}/usr" "${pkgdir}/usr"
     cp -R "${srcdir}/opt" "${pkgdir}/opt" 
 }
