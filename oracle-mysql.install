@@ -6,6 +6,7 @@ pre_install() {
 ## arg 1:  the new package version
 post_install() {
     cd /usr/local
+    msg "Linked MySQL installation to /usr/local/mysql"
     ln -s "/opt/oracle-mysql" mysql
     cd /usr/local/mysql
     chown -R mysql .
@@ -13,4 +14,5 @@ post_install() {
     scripts/mysql_install_db --user=mysql
     chown -R root .
     chown -R mysql data
+    systemctl daemon-reload
 }

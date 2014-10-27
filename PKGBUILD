@@ -5,9 +5,9 @@ pkgver=5.6.21
 pkgrel=0
 pkgdesc="Oracle MySQL 5.6"
 url="http://www.mysql.com/"
-arch=('x86_64')
-license=('GPLv2')
-depends=()
+arch=('i686' 'x86_64')
+license=('GPL2')
+depends=('gcc-libs-multilib' 'bash' 'python')
 optdepends=()
 makedepends=()
 conflicts=()
@@ -21,13 +21,9 @@ md5sums=('79f9a54bdc3731fd4bdf22db77f27ca7')
 
 PKGEXT='.pkg.tar'
 
-build() {
-    cd "${srcdir}"
-    mkdir "${pkgdir}/opt"
-    mv "mysql-5.6.21-linux-glibc2.5-$CARCH" "opt/${pkgname}"
-}
-
 package() {
+    mv "${srcdir}/mysql-5.6.21-linux-glibc2.5-$CARCH" "${srcdir}/${pkgname}"
+    mkdir "${pkgdir}/opt"
+    cp -R "${pkgname}" "${pkgdir}/opt" 
     cp -R "${srcdir}/usr" "${pkgdir}/usr"
-    cp -R "${srcdir}/opt" "${pkgdir}/opt" 
 }
