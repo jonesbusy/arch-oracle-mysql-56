@@ -1,7 +1,7 @@
 ## arg 1:  the new package version
 pre_install() {
-    id --group mysql &>/dev/null || (groupadd mysql && echo "\e[1;32mSucessfully created mysql group.\e[0m")
-    id --user mysql &>/dev/null || (useradd -r -g mysql mysql && echo "\e[1;32mSucessfully created mysql user.\e[0m")
+    id --group mysql &>/dev/null || (groupadd mysql && echo "Sucessfully created mysql group.")
+    id --user mysql &>/dev/null || (useradd -r -g mysql mysql && echo "Sucessfully created mysql user.")
 }
 ## arg 1:  the new package version
 post_install() {
@@ -14,20 +14,21 @@ post_install() {
     chgrp -R mysql .
     echo "\e[1;32mDone.\e[0m"
     echo "Installing MySQL databases..."
-    scripts/mysql_install_db --user=mysql > /dev/null 2>&1 && echo "\e[1;32mSucessfully installed MySQL databases.\e[0m"
-    echo "Changing permissions."
+    scripts/mysql_install_db --user=mysql > /dev/null 2>&1 && echo "Sucessfully installed MySQL databases."
     chown -R root .
     chown -R mysql data
+    mkdir /var/run/oracle-mysql
     echo "Reloading systemctl daemons..."
     systemctl daemon-reload
-    echo "\e[1;32mDone.\e[0m"
+    echo "Use `systemctl start oracle-mysql` to start MySQL."
 }
 
 pre_remove() {
     echo "Stopping MySQL service..."
     systemctl disable oracle-mysql
     systemctl stop oracle-mysql
-    echo "\e[1;32mDone.\e[0m"
+    rm -R /var/run/oracle-mysql
+    echo "Done."
 }
 
 post_remove() {
@@ -36,5 +37,5 @@ post_remove() {
     rm -Rf mysql
     echo "Removing installation folder..."
     rm -Rf /opt/oracle-mysql
-    echo "\e[1;32mDone.\e[0m"
+    echo "Done."
 }
