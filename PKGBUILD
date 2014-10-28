@@ -2,7 +2,7 @@
 # Contributor: Valentin Delaye <jonesbusy@gmail.com>
 pkgname=oracle-mysql
 pkgver=5.6.21
-pkgrel=0
+pkgrel=1
 pkgdesc="Oracle MySQL"
 url="http://www.mysql.com/"
 arch=('i686' 'x86_64')
