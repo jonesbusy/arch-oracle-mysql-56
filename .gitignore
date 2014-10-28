@@ -1,6 +1,9 @@
 src/mysql-5.6.21-linux-glibc2.5-x86_64/
 src/oracle-mysql/
 pkg/
+.INSTALL
+.MTREE
+.PKGINFO
 **/*.gz
 *.tar
 *.xz
